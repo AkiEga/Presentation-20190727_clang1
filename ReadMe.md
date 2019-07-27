@@ -10,6 +10,7 @@
   - [C言語講座](#c言語講座)
     - [C言語とは](#c言語とは)
     - [ワークフロー (実演)](#ワークフロー-実演)
+    - [開発環境](#開発環境)
     - [基本的文法](#基本的文法)
     - [ポインターとは? -hello worldからわかるポインタ-](#ポインターとは-hello-worldからわかるポインタ-)
     - [(もしも余裕があったら) FizzBuzz](#もしも余裕があったら-fizzbuzz)
@@ -58,6 +59,18 @@ AD2019: 東京🗼へ転勤　←いまココ
     CPUが理解しやすい機械語に変換(コンパイル)を要します
   - 手続き型言語
 <br>
+- メリット
+  - 処理速度が高速
+  - 中間処理が少ないのでCPUの処理量がすくない
+  - ハードウェアに特化した処理を実装しやすいので並列処理(OpenMP, CUDA, SSE...)を追加しやすい
+  - 上記特性なので、さらに最適化をかけて高速化されたライブラリも多数存在(boost, openblas)
+  - CPUやメモリといったハードウェアの処理を意識したプログラミングを要求されるのでスキルアップしやすい
+  - 歴史が古いのでソフト資産が膨大(e.g. boost, openblas, UNIX, Linux)
+  - 組み込み系/IOT(arudino, mbed )との相性良好
+<br>
+- デメリット
+  - プログラミングの難易度が高い
+  - オブジェクト指向を標準でサポートしていない
 
 ### ワークフロー (実演)
 お馴染み "hello world" を実演します
@@ -88,19 +101,32 @@ AD2019: 東京🗼へ転勤　←いまココ
   ```
 <br>
 
-- メリット
-  - 処理速度が高速
-  - 中間処理が少ないのでCPUの処理量がすくない
-  - ハードウェアに特化した処理を実装しやすいので並列処理(OpenMP, CUDA, SSE...)を追加しやすい
-  - 上記特性なので、さらに最適化をかけて高速化されたライブラリも多数存在(boost, openblas)
-  - CPUやメモリといったハードウェアの処理を意識したプログラミングを要求されるのでスキルアップしやすい
-  - 歴史が古いのでソフト資産が膨大(e.g. boost, openblas, UNIX, Linux)
-  - 組み込み系/IOT(arudino, mbed )との相性良好
+### 開発環境
+手っ取り早いのなら↓がおすすめです。
+[Online C++ compiler | ブラウザでプログラミング・実行ができる「オンライン実行環境」| paiza.IO](https://paiza.io/ja/projects/new?language=cpp)
 
-- デメリット
-  - プログラミングの難易度が高い
-  - オブジェクト指向を標準でサポートしていない
-  
+本格的にやりたい場合は
+- windows: 
+  - visual studio 2019 (IDE)
+  - eclipse (IDE)
+  - gcc from MinGW (Compiler)
+  - clang (Compiler)
+
+- mac
+  - xcode (IDE)
+  - visual studio for mac (IDE)
+  - gcc (Compiler)
+  - clang (Compiler)
+
+- linux
+  - gcc (Compiler)
+  - clang (Compiler)
+  - eclipse (IDE)
+
+- multi platform
+  - eclipse (IDE)
+  - CLion (IDE)
+  - QtCreator (IDE)
 
 ### 基本的文法
 - コメント
@@ -239,5 +265,5 @@ FizzBuzz
 
 ### 雑談
 例)
-こんな物作りたいんですけどどうすればいいですか?
-開発環境についての悩み
+- こんな物作りたいんですけどどうすればいいですか?
+- 開発環境についての悩み
