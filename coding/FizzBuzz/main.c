@@ -17,13 +17,6 @@ int main(int argc, char **argv){
 	return 0;
 }
 
-
-    for(char *word = "Fizz\0Buzz";argc<20;argc++)
-        printf("%d:%s\n",argc,(word+14-4*(argc%2==0)-9*(argc%3==0)));
-
-    main(i){for(char *w="FizzBuzz\0Fizz";i<101;i++)printf("%s\n",(w+13-4*(i%2==0)-9*(i%3==0)))}
-
-
 /*
 参考) FizzBuzzのcodegolfを世界一分かりやすく解説！#c言語 - Qiita
 URL: https://qiita.com/smicle/items/cf48853177e5ffdc574b
