@@ -1,18 +1,44 @@
----
-title: リベンジ、はじめてのC ~あのわからなかったポインタが~
----
-
-# アジェンダ
+# リベンジ、はじめてのC -あのわからなかったポインタが-
+## アジェンダ
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
 <!-- code_chunk_output -->
 
-- [アジェンダ](#アジェンダ)
-- [この勉強会について](#この勉強会について)
-- [参考](#参考)
+- [リベンジ、はじめてのC -あのわからなかったポインタが-](#リベンジ-はじめてのc-あのわからなかったポインタが-)
+  - [アジェンダ](#アジェンダ)
+  - [自己紹介](#自己紹介)
+  - [この勉強会について](#この勉強会について)
+  - [C言語講座](#c言語講座)
+    - [C言語とは](#c言語とは)
+    - [基本的文法](#基本的文法)
+    - [ポインターとは? -hello worldからわかるポインタ-](#ポインターとは-hello-worldからわかるポインタ-)
 
 <!-- /code_chunk_output -->
+## 自己紹介
+- 出身&来歴: 
+　|年|内容|
+  |---|---|
+  |AD198x | 千葉に生まれる |
+  |AD2007 | 大学@東京 |
+  |AD2011 | 大学院@東京 |
+  |AD2013 | とある自動車部品メーカー@愛知に就職 |
+  |AD2019 | 東京🗼へ転勤　←いまココ |
 
-# この勉強会について
+- 得意分野
+  - OS: Linux, RTOS(Tron系), Windows NT
+  - Lang. :   
+    - C/C++(そこそこガッツリ) 
+    - C#(ちょいちょい),  
+    - Python(そこそこ) 
+    - Powershell(好き)  
+    - JavaScript&Typescript(ちょっと)
+  - Lib. : CUDA, OpenMP, OpenMPI, OpenCV
+  - Platform: WPF, Qt, Windows API, .NET
+  - Other: 画像処理、並列処理、組み込み
+<br>
+- 趣味
+  オタク趣味全般, 自動車, 野球観戦, 自作PC, 自作キーボード, etc
+
+## この勉強会について
 - 対象者
 	- 以前C言語を学んだけど、イマイチ理解していなから学び直したい人
 	- これからC言語を勉強するので、しっかり学びたい人
@@ -22,59 +48,158 @@ title: リベンジ、はじめてのC ~あのわからなかったポインタ�
 	- なるべく会話しながら進めてゆきたいです。途中での質問大歓迎です！
 		"自分の疑問はみんなの疑問" 是非共有させてください。
 
-アジェンダ
-- C言語とは
-	- 概要
-	- 出来ること
+## C言語講座
+### C言語とは
+- 特徴
+  - コンパイル型言語
+    CPUが理解しやすい機械語に変換(コンパイル)を要します
+  - 手続き型言語
+<br>
+- ワークフロー
+  (実演) おなじみ hello world を実演します
+  1. コーディング
+    ソースコードを書く
+    ```c
+    #include <stdio.h>
 
-- 基本的文法 ~FizzBuzzへの最短の道~
-	- 型(int, float, char...)
-	- 算術式
-	- 条件文(if, switch)
-	- ループ文(for, while)
+    int main(int argc, char **argv){
+      printf("hello world\n");
+      return 0;
+    }
+    ```
+  2. コンパイル(ビルド)
+    コンパイラというツールCPUが理解しやすい機械語に変換し実行ファイルを作る(e.g. a.out)
+    ```shell
+    $ clang main.c
+    ```
+  3. テスト
+    実行ファイルを動かして意図通りに動いているか確認
+    ```shell
+    $ a.exe
+    ```
+  4. (意図通りに動いていれば) 完成
+    ```shell
+    $ .\a.exe
+    hello world
+    ```
+<br>
+- メリット
+  - 処理速度が高速
+  - 中間処理が少ないのでCPUの処理量がすくない
+  - ハードウェアに特化した処理を実装しやすいので並列処理(OpenMP, CUDA, SSE...)を追加しやすい
+  - 上記特性なので、さらに最適化をかけて高速化されたライブラリも多数存在(boost, openblas)
+  - CPUやメモリといったハードウェアの処理を意識したプログラミングを要求されるのでスキルアップしやすい
+  - 歴史が古いのでソフト資産が膨大(e.g. boost, openblas, UNIX, Linux)
+  - 組み込み系/IOT(arudino, mbed )との相性良好
+<br>
+- デメリット
+  - プログラミングの難易度が高い
+  - オブジェクト指向を標準でサポートしていない
+  
 
-- ポインターとは? ~FizzBuzzから分かるポインター～
+### 基本的文法
+- コメント
+基本的には下記コメントが可能。ただ、"//" は正確には正式ではない。
+```c
+/*hogehoge*/
+// fugafuga
+```
+- 型
+  - 数値
+  	int: 整数
+	  float: 浮動小数点
+  - 文字
+	  char: 文字
 
-    for(char *word = "Fizz\0Buzz";argc<20;argc++)
-        printf("%d:%s\n",argc,(word+14-4*(argc%2==0)-9*(argc%3==0)));
+- 変数
+  - 宣言, 代入
+  ```c
+  int a;
+  float b;
+  char c='c';
+  a = 1;
+  b = 2;
+  ```
+  - 配列
+  ```c
+  int a[3] = {1,2,3};
+  char h[5] = {'h', 'e', 'l', 'l', 'o'};
+  char w[] = "world";
+  ```
+- 算術式
+	- 四則演算(+, -, *, /)
+  - 剰余算
+  ```c
+  int a;
+  a = 4%3; // a = 1
+  ```
+- インクリメント/デクリメント
+  ```c
+  int a=0, b;
+  a = a + 1;  // a = 1
+  a++;        // a = 2
+  a+=10;      // a = 12
+  a--;        // a = 11
 
-    main(i){for(char *w="FizzBuzz\0Fizz";i<101;i++)printf("%s\n",(w+13-4*(i%2==0)-9*(i%3==0)))}
+  // 前置きと後置きで挙動が違う
+  // 前置き: インクリメント → インクリメント以外の処理
+  // 後置き: インクリメント以外の処理 → インクリメント
+  b = ++a;    // b = 12, a=13 
+  ```
 
 
-main(i){
-	for(char*w="FizzBuzz\0Fizz";i<101;i++)
-		if(i%3==0||i%5==0){
-			printf("%s\n",w+13-4*(i%5==0)-9*(i%3==0))
-		}else{
-			printf("%d\n",i)
-		}
+- 条件文(if, switch)
+  - if
+  ```c
+  if( a == b){ 
+    // aとbが等しい時
+    hoge();
+  }else if(a == c){
+    // aとbが等しくなく、かつ、aとcが等しい時
+    fuga();
+  }else{
+    // aとbが等しくなく、かつ、aとcも等しくない時
+    hogefuga();
+  }
+  ```
 
-for(char*w="FizzBuzz\0Fizz";i<101;i++){int j=4*(i%5==0)+9*(i%3==0);j>0?printf("%s\n",w+13-j):printf("%d\n",i);}
+- ループ文(for, while)
+  - for
+  ```c
+  int i,a;
+  a=0;
+  for(i=0;i<100;i++){
+    a = a+1;
+  }
+  ```
+  - while
+  ```c
+  int i=0;
+  while(i<100){
+    i++;
+    fugafuga();
+  }
+  ```
+  ```c
+  int i=0;
+  do{
+    i++;
+    fugafuga();
+  }while (i<1); // iが1になっているのでここです抜けてしまう
+  ```
 
-for(;i<101;i++){int j=4*(i%5==0)+9*(i%3==0);j>0?printf("%s\n",&"FizzBuzz\0Fizz"[13-j]):printf("%d\n",i);}
+### ポインターとは? -hello worldからわかるポインタ-
+- ポインターとは?
+  c言語はメモリ上の値を参照できる "ポインター" という機能があります。
 
-main(i){
-	for(;i<101;puts(i++%5?"":"Buzz"))
-		printf(
-			i%3?
-				i%5?
-					"%d":
-				0:
-				"Fizz"
-			,i);
-}
-
-main(i){
-	for(char*w="FizzBuzz\0Fizz";i<101;i++)
-		if(i%3==0||i%5==0){
-			printf("%s\n",w+13-4*(i%5==0)-9*(i%3==0))
-		}else{
-			printf("%d\n",i)
-		}
-
-# 参考
-Title: FizzBuzzを1byteで実装する - Qiita
-URL: https://qiita.com/ymg_aq/items/b8e5d26035180bc8797e#_reference-47928755625956643f7b
-
-Title: How to Manipulate Filenames Having Spaces and Special Characters in Linux
-URL: https://www.tecmint.com/manage-linux-filenames-with-special-characters/
+  ```c
+  int a=0;
+  int *b; // 'int *' でint型のアドレスを指し示すためのポインタ
+  b = &a; // '&'でその変数のアドレスを渡すという意味
+  a = 1;  // a = 1, b =1
+  b = 2;  // a = 2, b =2
+  ```
+  
+  変数の項で一瞬文字列のお話をしましたが、
+  文字列であるchar[]はchar型の値がメモリ空間上に詰められているだけなのです。
+  (以降、実演)
